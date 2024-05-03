@@ -1,13 +1,24 @@
 from PIL import Image, ImageEnhance, ImageFilter
 import os
 
+# Paths for image
 path = './img'
+# Paths for edited image
 pathOut = '/editedImgs'
 
+
 for filename in os.listdir(path):
+    """
+    
+    """
     img = Image.open(f"{path}/{filename}")
 
-    edit = img.filter(ImageFilter.BLUR).convert("L")
+    edit = img.filter(ImageFilter.SHARPEN).convert("L")
+
+    factor = 1.5
+    enhancer = ImageEnhance.Contrast(edit)
+    edit = enhancer.enhance(factor)
+
 
     clean_name = os.path.splitext(filename)[0]
 
